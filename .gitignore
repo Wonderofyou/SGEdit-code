@@ -1,0 +1,7 @@
+.env
+depreciate
+__pycache__
+.DS_Store
+checkpoints
+outputs
+Grounded-Segment-Anything

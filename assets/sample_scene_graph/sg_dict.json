@@ -1,0 +1,51 @@
+{
+    "objects": [
+        "potted plant",
+        "sunglasses",
+        "wooden surface",
+        "book"
+    ],
+    "tuples": [
+        [
+            "potted plant",
+            "placed on",
+            "wooden surface"
+        ],
+        [
+            "sunglasses",
+            "resting on",
+            "wooden surface"
+        ],
+        [
+            "book",
+            "lying on",
+            "wooden surface"
+        ]
+    ],
+    "bboxes": [
+        [
+            0.10546875,
+            0.25390625,
+            0.337890625,
+            0.6484375
+        ],
+        [
+            0.458984375,
+            0.490234375,
+            0.712890625,
+            0.603515625
+        ],
+        [
+            0.0,
+            0.1796875,
+            0.998046875,
+            0.998046875
+        ],
+        [
+            0.24609375,
+            0.603515625,
+            0.861328125,
+            0.962890625
+        ]
+    ]
+}

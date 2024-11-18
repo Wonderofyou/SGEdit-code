@@ -1,0 +1,4 @@
+Add an object: 'teddy bear'. Add tuple: ['teddy bear' -> on -> 'book']
+Remove: 'potted plant'
+Replace 'book' by 'hat'
+Modify a relationship: from ['sunglasses' -> resting on -> 'wooden surface'] to ['sunglasses' -> on -> 'book']
