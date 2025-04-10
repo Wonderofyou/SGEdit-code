@@ -13,15 +13,10 @@ REL_INFO
 User Modification: 
 MODIFICATION'''
 
-# TO_JSON = '''Output your answer in a json format result directly:
-# Am example of expect output:
-# {"apple": [0.55, 0.43, 0.27, 0.37]}
-# Note: direcly output the json format result, where the key is the object and value is the bounding box.'''
-
 TO_JSON = '''Output your answer in a json format result directly:
 Am example of expect output:
 {"apple": [0.55, 0.43, 0.27, 0.37]}
-Note: direcly output the json format result, where the key is the object and value is the bounding box. Do NOT need any words like "json" to mark the answer. Only json format'''
+Note: direcly output the json format result, where the key is the object and value is the bounding box.'''
 
 IS_INTERACTION = '''Your task is to examine a tuple containing three elements: (entity1, relation, entity2), and identify the type of relationship between the entities. There are two categories: 
 1. Spatial Relationships: Indicates physical position, such as "beside", "on", "to the left of", "outside", "in front of", "landing on", "standing on" and "sitting on". 
@@ -291,7 +286,8 @@ def construct_edits(sg_path, mod_txt, out_dir):
             #Debug section
             temp = box_proposal_chats.ask_GPT(TO_JSON)
             print("======================")
-            print(temp)
+            print(f"[DEBUG] temp = {repr(temp)}")
+            print(f"[DEBUG] type(temp) = {type(temp)}")
             print("======================")
             
             box_updates = json.loads(temp)
