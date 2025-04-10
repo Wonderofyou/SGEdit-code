@@ -13,10 +13,17 @@ REL_INFO
 User Modification: 
 MODIFICATION'''
 
-TO_JSON = '''Output your answer in a json format result directly:
-Am example of expect output:
-{"apple": [0.55, 0.43, 0.27, 0.37]}
-Note: direcly output the json format result, where the key is the object and value is the bounding box.'''
+# TO_JSON = '''Output your answer in a json format result directly:
+# Am example of expect output:
+# {"apple": [0.55, 0.43, 0.27, 0.37]}
+# Note: direcly output the json format result, where the key is the object and value is the bounding box.'''
+
+TO_JSON = '''Output ONLY valid JSON object. 
+DO NOT wrap it in code block or markdown (i.e., no triple backticks). 
+Return the raw JSON object directly.
+
+Example:
+{"apple": [0.55, 0.43, 0.27, 0.37]}'''
 
 IS_INTERACTION = '''Your task is to examine a tuple containing three elements: (entity1, relation, entity2), and identify the type of relationship between the entities. There are two categories: 
 1. Spatial Relationships: Indicates physical position, such as "beside", "on", "to the left of", "outside", "in front of", "landing on", "standing on" and "sitting on". 
