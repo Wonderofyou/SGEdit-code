@@ -291,8 +291,12 @@ def construct_edits(sg_path, mod_txt, out_dir):
 
     with open(mod_txt, "r") as f:
         modis = f.read().splitlines()
+    print(modis)
         
     for mod_num, mod in enumerate(modis):
+        print("======================")
+        print(f"[DEBUG] mod_num_{mod} : mod = {mod}")
+        print("======================")
         edit_info = extract_edit(mod)
         print("======================")
         print(f"[DEBUG] mod_num_{mod_num} : edit_info = {edit_info}")
