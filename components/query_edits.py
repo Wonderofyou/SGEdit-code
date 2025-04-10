@@ -285,7 +285,10 @@ def construct_edits(sg_path, mod_txt, out_dir):
 
             #Debug section
             temp = box_proposal_chats.ask_GPT(TO_JSON)
+            print("======================")
             print(temp)
+            print("======================")
+            
             box_updates = json.loads(temp)
 
             # Update scene graph
