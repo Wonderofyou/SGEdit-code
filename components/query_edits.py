@@ -345,7 +345,9 @@ def construct_edits(sg_path, mod_txt, out_dir):
 
             # Update scene graph
             update_sg = update_scene_graph(copy.deepcopy(sg_dict), operation, edit_info, box_updates)
-            print(update_sg)
+            print("======================")
+            print(f"[DEBUG] update_sg = {update_sg}")
+            print("======================")
 
             # Determine generate objects: (For 'add object' or 'modify relationship', it might introduce new interaction, generate both objects in this new relationship)
             gen_objects = list(box_updates.keys())
@@ -374,7 +376,9 @@ def construct_edits(sg_path, mod_txt, out_dir):
             # Obtain generate prompt
             question = prepare_prompt_question(gen_objects, edit_info, update_sg["tuples"])
             prompt = Chat().ask_GPT(question, show_chats=True)
-            print(prompt)
+            print("======================")
+            print(f"[DEBUG] prompt = {prompt}")
+            print("======================")
 
             edit_execute = get_edit_execute(edit_info, gen_objects, prompt, update_sg)
         else:
