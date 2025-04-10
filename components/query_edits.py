@@ -281,7 +281,12 @@ def construct_edits(sg_path, mod_txt, out_dir):
             question = prepare_box_question(operation, mod, sg_dict)
             box_proposal_chats = Chat()
             response = box_proposal_chats.ask_GPT(question, show_chats=True)
-            box_updates = json.loads(box_proposal_chats.ask_GPT(TO_JSON))
+            #box_updates = json.loads(box_proposal_chats.ask_GPT(TO_JSON))
+
+            #Debug section
+            temp = box_proposal_chats.ask_GPT(TO_JSON)
+            print(temp)
+            box_updates = json.loads(temp)
 
             # Update scene graph
             update_sg = update_scene_graph(copy.deepcopy(sg_dict), operation, edit_info, box_updates)
