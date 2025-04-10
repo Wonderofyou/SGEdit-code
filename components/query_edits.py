@@ -298,18 +298,29 @@ def construct_edits(sg_path, mod_txt, out_dir):
             print("======================")
             
             box_updates = json.loads(temp)
-            print(box_updates)
+            print("======================")
+            print(f"[DEBUG] box_updates = {box_updates}")
+            print("======================")
+            
 
             # Update scene graph
             update_sg = update_scene_graph(copy.deepcopy(sg_dict), operation, edit_info, box_updates)
 
             # Determine generate objects: (For 'add object' or 'modify relationship', it might introduce new interaction, generate both objects in this new relationship)
             gen_objects = list(box_updates.keys())
+
+            print("======================")
+            print(f"[DEBUG] gen_objects = {gen_objects}")
+            print("======================")
             if operation in ["add", "edit_edge"]:
                 new_relation = edit_info["add_tuple"] if operation == "add" else edit_info["tgt_rel"]
                 question = IS_INTERACTION + f"({','.join(new_relation)})"
                 relation_type = Chat().ask_GPT(question)[len("Output: "):]
                 gen_objects = [new_relation[0], new_relation[1]] if relation_type == "interaction" else gen_objects
+
+            print("======================")
+            print(f"[DEBUG] gen_objects = {gen_objects}")
+            print("======================")
 
             # Obtain generate prompt
             question = prepare_prompt_question(gen_objects, edit_info, update_sg["tuples"])
