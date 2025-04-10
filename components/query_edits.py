@@ -335,6 +335,10 @@ def construct_edits(sg_path, mod_txt, out_dir):
             print(f"[DEBUG] gen_objects = {gen_objects}")
             print("======================")
             if operation in ["add", "edit_edge"]:
+                print("***********")
+                print(f"[DEBUG] operation in add or edit_edge")
+                print("***********")
+                
                 new_relation = edit_info["add_tuple"] if operation == "add" else edit_info["tgt_rel"]
                 print("======================")
                 print(f"[DEBUG] new_relation = {new_relation}")
