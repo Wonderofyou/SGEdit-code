@@ -294,7 +294,13 @@ def construct_edits(sg_path, mod_txt, out_dir):
         
     for mod_num, mod in enumerate(modis):
         edit_info = extract_edit(mod)
+        print("======================")
+        print(f"[DEBUG] mode_num_{mode_num} : edit_info = {edit_info}")
+        print("======================")
         operation = edit_info["operation"]
+        print("======================")
+        print(f"[DEBUG] operation = {operation}")
+        print("======================")
         if operation != "remove":
             # Update box
             question = prepare_box_question(operation, mod, sg_dict)
@@ -326,6 +332,9 @@ def construct_edits(sg_path, mod_txt, out_dir):
             print("======================")
             if operation in ["add", "edit_edge"]:
                 new_relation = edit_info["add_tuple"] if operation == "add" else edit_info["tgt_rel"]
+                print("======================")
+                print(f"[DEBUG] new_relation = {new_relation}")
+                print("======================")
                 question = IS_INTERACTION + f"({','.join(new_relation)})"
                 relation_type = Chat().ask_GPT(question)[len("Output: "):]
                 gen_objects = [new_relation[0], new_relation[1]] if relation_type == "interaction" else gen_objects
