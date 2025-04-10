@@ -255,11 +255,11 @@ def get_edit_execute(edit_info, gen_objects, prompt, update_sg):
     print("======================")
     gen_bboxes = [name2bbox[obj] for obj in gen_objects]
     print("======================")
-    print(f"[DEBUG] gen_box = {gen_decs}")
+    print(f"[DEBUG] gen_bboxes = {gen_bboxes}")
     print("======================")
     gen_bboxes = [xywh2xyxy(box) for box in gen_bboxes]
     print("======================")
-    print(f"[DEBUG] gen_box = {gen_decs}")
+    print(f"[DEBUG] gen_bboxes = {gen_bboxes}")
     print("======================")
 
     if operation == "edit_edge":
