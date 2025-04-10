@@ -52,8 +52,8 @@ with open(update_scene_graph_path, 'w') as f:
     json.dump(annotated_sg_dict, f, indent=4)
 
 # c) concept learning
-from components.train_model import concept_learning
-concept_learning(mask_output_dir, update_scene_graph_path, model_save_dir)
+# from components.train_model import concept_learning
+# concept_learning(mask_output_dir, update_scene_graph_path, model_save_dir)
 
 
 # 3. Editing Control:
@@ -62,5 +62,5 @@ construct_edits(update_scene_graph_path, modification_path, llm_edit_dir)
 
 
 # 4. Attention-modulated Object Removal and Insertion
-from components.run_edits import execute_edits
-execute_edits(args, model_save_dir, mask_output_dir, llm_edit_dir, edit_image_dir)
+# from components.run_edits import execute_edits
+# execute_edits(args, model_save_dir, mask_output_dir, llm_edit_dir, edit_image_dir)
