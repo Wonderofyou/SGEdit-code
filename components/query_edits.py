@@ -290,6 +290,7 @@ def construct_edits(sg_path, mod_txt, out_dir):
             print("======================")
             
             box_updates = json.loads(temp)
+            print(box_updates)
 
             # Update scene graph
             update_sg = update_scene_graph(copy.deepcopy(sg_dict), operation, edit_info, box_updates)
