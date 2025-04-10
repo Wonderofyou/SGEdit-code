@@ -260,8 +260,17 @@ def get_edit_execute(edit_info, gen_objects, prompt, update_sg):
         remove_objects = gen_objects
     
     name2token = dict(zip(update_sg["objects"], update_sg["alias"]))
+    print("======================")
+    print(f"[DEBUG] name2token = {name2token}")
+    print("======================")
     name2desc = dict(zip(update_sg["objects"], update_sg["desc"]))
+    print("======================")
+    print(f"[DEBUG] name2desc = {name2desc}")
+    print("======================")
     name2bbox = dict(zip(update_sg["objects"], update_sg["bboxes"]))
+    print("======================")
+    print(f"[DEBUG] name2bbox = {name2bbox}")
+    print("======================")
 
     gen_desc = [name2desc[obj] for obj in gen_objects]
     print("======================")
