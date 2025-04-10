@@ -25,9 +25,27 @@ Return the raw JSON object directly.
 Example:
 {"apple": [0.55, 0.43, 0.27, 0.37]}'''
 
+# IS_INTERACTION = '''Your task is to examine a tuple containing three elements: (entity1, relation, entity2), and identify the type of relationship between the entities. There are two categories: 
+# 1. Spatial Relationships: Indicates physical position, such as "beside", "on", "to the left of", "outside", "in front of", "landing on", "standing on" and "sitting on". 
+# 2. Interaction Relationships: Describes actions or interactions, such as "riding", "holding", "reading".
+
+# Here are some examples to guide you:
+# ## Examples
+# Input: (person, seated on, boat)
+# Output: spatial
+# Input: (person, beside, bike)
+# Output: spatial
+# Input: (person, playing, guitar)
+# Output: interaction
+# Input: (person, holding, wallet)
+# Output: interaction
+
+# ## Your task:
+# Input: '''
 IS_INTERACTION = '''Your task is to examine a tuple containing three elements: (entity1, relation, entity2), and identify the type of relationship between the entities. There are two categories: 
 1. Spatial Relationships: Indicates physical position, such as "beside", "on", "to the left of", "outside", "in front of", "landing on", "standing on" and "sitting on". 
 2. Interaction Relationships: Describes actions or interactions, such as "riding", "holding", "reading".
+3. Your answer must follow the format : Output: {relation_ship}
 
 Here are some examples to guide you:
 ## Examples
@@ -345,7 +363,7 @@ def construct_edits(sg_path, mod_txt, out_dir):
                 print("======================")
                 question = IS_INTERACTION + f"({','.join(new_relation)})"
                 relation_type = Chat().ask_GPT(question,show_chats = True)[len("Output: "):]
-                print(f"***relation_type*** {relation_type}")
+                print(relation_type)
                 gen_objects = [new_relation[0], new_relation[1]] if relation_type == "interaction" else gen_objects
 
             print("======================")
