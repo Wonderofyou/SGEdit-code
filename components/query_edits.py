@@ -295,7 +295,7 @@ def construct_edits(sg_path, mod_txt, out_dir):
     for mod_num, mod in enumerate(modis):
         edit_info = extract_edit(mod)
         print("======================")
-        print(f"[DEBUG] mode_num_{mode_num} : edit_info = {edit_info}")
+        print(f"[DEBUG] mod_num_{mod_num} : edit_info = {edit_info}")
         print("======================")
         operation = edit_info["operation"]
         print("======================")
