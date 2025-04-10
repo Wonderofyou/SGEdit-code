@@ -247,11 +247,11 @@ def get_edit_execute(edit_info, gen_objects, prompt, update_sg):
 
     gen_desc = [name2desc[obj] for obj in gen_objects]
     print("======================")
-    print(f"[DEBUG] gen_decs = {gen_decs}")
+    print(f"[DEBUG] gen_desc = {gen_desc}")
     print("======================")
     gen_desc = [desc.split(".")[1] if desc.startswith("A photo of a <asset0>") else desc for desc in gen_desc]
     print("======================")
-    print(f"[DEBUG] gen_decs = {gen_decs}")
+    print(f"[DEBUG] gen_desc = {gen_desc}")
     print("======================")
     gen_bboxes = [name2bbox[obj] for obj in gen_objects]
     print("======================")
