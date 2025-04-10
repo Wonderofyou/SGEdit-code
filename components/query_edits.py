@@ -375,6 +375,9 @@ def construct_edits(sg_path, mod_txt, out_dir):
 
             # Obtain generate prompt
             question = prepare_prompt_question(gen_objects, edit_info, update_sg["tuples"])
+            print("************************")
+            print(f"[DEBUG] ques = {question}")
+            print("************************")
             prompt = Chat().ask_GPT(question, show_chats=True)
             print("======================")
             print(f"[DEBUG] prompt = {prompt}")
