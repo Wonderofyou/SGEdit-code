@@ -344,7 +344,8 @@ def construct_edits(sg_path, mod_txt, out_dir):
                 print(f"[DEBUG] new_relation = {new_relation}")
                 print("======================")
                 question = IS_INTERACTION + f"({','.join(new_relation)})"
-                relation_type = Chat().ask_GPT(question)[len("Output: "):]
+                relation_type = Chat().ask_GPT(question,show_chats = True)[len("Output: "):]
+                print(f"***relation_type*** {relation_type}")
                 gen_objects = [new_relation[0], new_relation[1]] if relation_type == "interaction" else gen_objects
 
             print("======================")
