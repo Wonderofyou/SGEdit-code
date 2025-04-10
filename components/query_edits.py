@@ -395,6 +395,9 @@ def construct_edits(sg_path, mod_txt, out_dir):
             edit_execute = get_edit_execute(edit_info, gen_objects, prompt, update_sg)
         else:
             update_sg = update_scene_graph(copy.deepcopy(sg_dict), operation, edit_info, None)
+            print("======================")
+            print(f"[DEBUG] update_sg = {update_sg}")
+            print("======================")
             edit_execute = get_edit_execute(edit_info, [], "", update_sg)
         
         with open(f"{out_dir}/{mod_num}.json", "w") as f:
