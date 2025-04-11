@@ -180,6 +180,8 @@ class SGPipeline(StableDiffusionPipeline):
             prompt,
             padding="max_length",
             max_length=77,
+            #debug 
+            truncation=True,
             return_tensors="pt"
         )
         text_embeddings = self.text_encoder(text_input.input_ids.to(DEVICE))[0]
