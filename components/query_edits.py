@@ -127,7 +127,11 @@ def prepare_prompt_question(gen_objects, edit_info, relationships):
     return question
 
 def extract_edit(s):
+    print("!!!!!!!!!!!!!!!!!!")
+    print(s)
+    print("!!!!!!!!!!!!!!!!!!")
     if s.startswith("Add"):
+        print("!!!!!!!!!!!!!!!!!!")
         pattern = "Add an object: '(.*?)'. Add tuple: \['(.*?)' -> (.*?) -> '(.*?)'\]"
         match = re.search(pattern, s)
         add_object = match.group(1)
@@ -137,6 +141,12 @@ def extract_edit(s):
             "add_object": add_object,
             "add_tuple": add_tuple,
         }
+        print(match)
+        print(add_object)
+        print(add_tuple)
+        print(info)
+        print("!!!!!!!!!!!!!!!!!!")
+        
     elif s.startswith("Remove"):
         pattern = "Remove: '(.*)'"
         match = re.search(pattern, s)
