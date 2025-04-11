@@ -1,2 +1,3 @@
 Add an object: 'teddy bear'. Add tuple: ['teddy bear' -> on -> 'book']
-Add an object: 'cat'. Add tuple: ['A big CAT' -> next to -> 'eyeglasses']
+Remove: 'pot'
+Replace 'book' by 'hat'
