@@ -1,3 +1,2 @@
 Add an object: 'teddy bear'. Add tuple: ['teddy bear' -> on -> 'book']
 Add an object: 'cat'. Add tuple: ['cat' -> next to -> 'eyeglasses']
-
