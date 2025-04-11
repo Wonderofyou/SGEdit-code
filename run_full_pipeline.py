@@ -61,6 +61,6 @@ from components.query_edits import construct_edits
 construct_edits(update_scene_graph_path, modification_path, llm_edit_dir)
 
 
-# 4. Attention-modulated Object Removal and Insertion
-# from components.run_edits import execute_edits
-# execute_edits(args, model_save_dir, mask_output_dir, llm_edit_dir, edit_image_dir)
+4. Attention-modulated Object Removal and Insertion
+from components.run_edits import execute_edits
+execute_edits(args, model_save_dir, mask_output_dir, llm_edit_dir, edit_image_dir)
