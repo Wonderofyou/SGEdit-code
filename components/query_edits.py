@@ -325,6 +325,25 @@ def get_edit_execute(edit_info, gen_objects, prompt, update_sg):
 def construct_edits(sg_path, mod_txt, out_dir):
     with open(sg_path, 'r') as f:
         sg_dict = json.load(f)
+    print("Read the sg_dict before editting")
+    print(f"SG_DICT : {sg_dict}")
+
+    # --- NHẬP NHIỀU DÒNG TỪ INPUT ---
+    print("Nhập từng dòng nội dung (nhập dòng trống để kết thúc):")
+    mod_txt_content = []
+    while True:
+        line = input()
+        if line.strip() == "":
+            break
+        mod_txt_content.append(line)
+
+    # --- GHI FILE MOD_TXT TRƯỚC ---
+    with open(mod_txt, 'w') as f:
+      for i, line in enumerate(mod_txt_content):
+          if i < len(mod_txt_content) - 1:
+              f.write(line + '\n')
+          else:
+              f.write(line)  # Không thêm \n ở dòng cuối
 
     with open(mod_txt, "r") as f:
         modis = f.read().splitlines()
@@ -351,10 +370,6 @@ def construct_edits(sg_path, mod_txt, out_dir):
 
             #Debug section
             temp = box_proposal_chats.ask_GPT(TO_JSON)
-            print("======================")
-            print(f"[DEBUG] temp = {repr(temp)}")
-            print(f"[DEBUG] type(temp) = {type(temp)}")
-            print("======================")
             
             box_updates = json.loads(temp)
             print("======================")
