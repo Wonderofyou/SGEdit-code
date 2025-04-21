@@ -236,6 +236,10 @@ def execute_edits(args, model_path, input_dir, llm_edit_dir, out_dir):
         sub_dir = os.path.join(out_dir, sub_dir)
         with open(file) as f:
             gen_dict = json.load(f)
+            print("------------------------")
+            print(f"gen dict = {gen_dict}")
+            print("------------------------")
+            
         sg_editor.gen_union(args, gen_dict, sub_dir)
     
     
