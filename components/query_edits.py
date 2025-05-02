@@ -328,22 +328,22 @@ def construct_edits(sg_path, mod_txt, out_dir):
     print("Read the sg_dict before editting")
     print(f"SG_DICT : {sg_dict}")
 
-    # --- NHẬP NHIỀU DÒNG TỪ INPUT ---
-    print("Nhập từng dòng nội dung (nhập dòng trống để kết thúc):")
-    mod_txt_content = []
-    while True:
-        line = input()
-        if line.strip() == "":
-            break
-        mod_txt_content.append(line)
+    # # --- NHẬP NHIỀU DÒNG TỪ INPUT ---
+    # print("Nhập từng dòng nội dung (nhập dòng trống để kết thúc):")
+    # mod_txt_content = []
+    # while True:
+    #     line = input()
+    #     if line.strip() == "":
+    #         break
+    #     mod_txt_content.append(line)
 
-    # --- GHI FILE MOD_TXT TRƯỚC ---
-    with open(mod_txt, 'w') as f:
-      for i, line in enumerate(mod_txt_content):
-          if i < len(mod_txt_content) - 1:
-              f.write(line + '\n')
-          else:
-              f.write(line)  # Không thêm \n ở dòng cuối
+    # # --- GHI FILE MOD_TXT TRƯỚC ---
+    # with open(mod_txt, 'w') as f:
+    #   for i, line in enumerate(mod_txt_content):
+    #       if i < len(mod_txt_content) - 1:
+    #           f.write(line + '\n')
+    #       else:
+    #           f.write(line)  # Không thêm \n ở dòng cuối
 
     with open(mod_txt, "r") as f:
         modis = f.read().splitlines()
