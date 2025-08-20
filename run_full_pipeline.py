@@ -40,27 +40,27 @@ with open(basic_scene_graph_path, 'w') as f:
     json.dump(sg_dict, f, indent=4)
 
 
-# 2. Node Attribute Extraction:  
-# a) construct masks
-from utils.Segment.seg_utils import construct_node_masks
-construct_node_masks(image_path, basic_scene_graph_path, mask_output_dir)
+# # 2. Node Attribute Extraction:  
+# # a) construct masks
+# from utils.Segment.seg_utils import construct_node_masks
+# construct_node_masks(image_path, basic_scene_graph_path, mask_output_dir)
 
-# b) construct descs
-from components.query_scene_graph import construct_node_desc
-annotated_sg_dict = construct_node_desc(image_path, basic_scene_graph_path)
-with open(update_scene_graph_path, 'w') as f:
-    json.dump(annotated_sg_dict, f, indent=4)
+# # b) construct descs
+# from components.query_scene_graph import construct_node_desc
+# annotated_sg_dict = construct_node_desc(image_path, basic_scene_graph_path)
+# with open(update_scene_graph_path, 'w') as f:
+#     json.dump(annotated_sg_dict, f, indent=4)
 
-# c) concept learning
-from components.train_model import concept_learning
-concept_learning(mask_output_dir, update_scene_graph_path, model_save_dir)
-
-
-# 3. Editing Control:
-from components.query_edits import construct_edits
-construct_edits(update_scene_graph_path, modification_path, llm_edit_dir)
+# # c) concept learning
+# from components.train_model import concept_learning
+# concept_learning(mask_output_dir, update_scene_graph_path, model_save_dir)
 
 
-# 4. Attention-modulated Object Removal and Insertion
-from components.run_edits import execute_edits
-execute_edits(args, model_save_dir, mask_output_dir, llm_edit_dir, edit_image_dir)
+# # 3. Editing Control:
+# from components.query_edits import construct_edits
+# construct_edits(update_scene_graph_path, modification_path, llm_edit_dir)
+
+
+# # 4. Attention-modulated Object Removal and Insertion
+# from components.run_edits import execute_edits
+# execute_edits(args, model_save_dir, mask_output_dir, llm_edit_dir, edit_image_dir)
