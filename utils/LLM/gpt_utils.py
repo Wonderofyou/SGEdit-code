@@ -7,116 +7,61 @@ from openai import OpenAI
 
 # OpenAI API Key
 load_dotenv()
-api_key = os.getenv("OPENAI_API_KEY")
+api_key = os.getenv("GEMINI_API_KEY")
 
-# Function to encode the image
-def encode_image(img, size=(512, 512)):
-    # Resize the image
-    img = img.resize(size)
-
-    # Save the resized image to a byte buffer
-    buffer = BytesIO()
-    img.save(buffer, format="JPEG")
-    buffer.seek(0)
-
-    # Encode the image
-    return base64.b64encode(buffer.read()).decode('utf-8')
-
+# Configure Gemini
+genai.configure(api_key=api_key)
 
 class Chat_w_Vision:
-    def __init__(self, img) -> None:
-        self.base64_image = encode_image(img)
-        self.headers = {
-          "Content-Type": "application/json",
-          "Authorization": f"Bearer {api_key}"
-        }
-        self.messages = []
-        self.gpt_history = []
-    
-    def create_initial_message(self, question):
-        new_message = {
+    def __init__(self, model_name='gemini-2.5-pro') :
+        # Khởi tạo chat session
+        self.model = genai.GenerativeModel(model_name)
+        self.chat = self.model.start_chat(history=[])
+        self.messages = []       # Lưu lịch sử hội thoại (user + model)
+        self.gpt_history = []    # Lưu câu trả lời của model
+
+    def _create_message(self, question, image=None):
+        """
+        Tạo message cho user.
+        - Nếu image != None, content là [text, image].
+        - Nếu image == None, chỉ là text.
+        """
+        content = [question, image] if image is not None else question
+        return {
             "role": "user",
-            "content": [
-              {
-                "type": "text",
-                "text": question
-              },
-              {
-                "type": "image_url",
-                "image_url": {
-                  "url": f"data:image/jpeg;base64,{self.base64_image}"
-                }
-              }
-            ]
-          }
-        self.messages.append(new_message)
-    
-    def create_follow_message(self, question):
-        new_message = {
-            "role": "user",
-            "content": [
-                {
-                "type": "text",
-                "text": question
-                }
-            ]
+            "content": content
         }
-        self.messages.append(new_message)
-    
-    def add_message(self, message):
-        self.messages.append(message)
-    
-    def ask_GPT(self, question, show_chats=False):
-        if len(self.messages) == 0:
-            self.create_initial_message(question)
-        else:
-            self.create_follow_message(question)
-        
-        self.payload = {
-          "model": "gpt-4-vision-preview",
-          "messages": self.messages,
-          "max_tokens": 300
-        }
-        response = requests.post("https://api.openai.com/v1/chat/completions", headers=self.headers, json=self.payload).json()
-        gpt_message = response["choices"][0]["message"]
 
-        if "choices" not in response:
-            print("GPT refuse to reply. You might not have sufficient money in your account.")
-            return None
-        
-        self.gpt_history.append(gpt_message["content"])
-        self.add_message(gpt_message)
+    def _add_model_message(self, message):
+        """Thêm câu trả lời của model vào lịch sử."""
+        self.messages.append({"role": "model", "content": message})
 
-        if show_chats:
-            print(f"Agent: {question}")
-            print("=============================")
-            print(f"LLM: {gpt_message['content']}")
-            print("=============================")
-            
-        return gpt_message["content"]
-    
+    def ask_GPT(self, question, image=None, show_chats=False):
+        """
+        Gửi câu hỏi tới model:
+        - question: text câu hỏi.
+        - image: ảnh (có thể None).
+        """
+        try:
+            user_message = self._create_message(question, image)
+            self.messages.append(user_message)
 
-class Chat:
-    def __init__(self) -> None:
-      self.client = OpenAI()
-      self.messages = []
+            # Gửi tới model
+            response = self.chat.send_message(user_message["content"])
+            answer = response.text
 
-    def add_message(self, message):
-        self.messages.append({"role": "user", "content": message})
+            self.gpt_history.append(answer)
+            self._add_model_message(answer)
 
-    def ask_GPT(self, question, show_chats=False):
-        self.add_message(question)
-        response = self.client.chat.completions.create(
-                model="gpt-4-0125-preview",
-                messages=self.messages,
-            )
-        gpt_message = response.choices[0].message
-        self.messages.append(gpt_message)
+            if show_chats:
+                print(f"User: {question}")
+                if image is not None:
+                    print("[Image attached]")
+                print("=============================")
+                print(f"LLM: {answer}")
+                print("=============================")
 
-        if show_chats:
-            print(f"Agent: {question}")
-            print("=============================")
-            print(f"LLM: {gpt_message.content}")
-            print("=============================")
-
-        return gpt_message.content
+            return answer
+        except Exception as e:
+            print(f"Error: {e}")
+            return f"Error occurred: {str(e)}"
