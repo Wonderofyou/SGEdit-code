@@ -2,7 +2,7 @@ import json
 import argparse
 import os
 import torch
-torch.cuda.set_device(0)
+# torch.cuda.set_device(0)
 
 # Inputs
 def parse_args():
